@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
+})
+
 module.exports = {
   host: '127.0.0.1',
   port: '5433',
