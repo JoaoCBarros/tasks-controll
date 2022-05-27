@@ -1,22 +1,12 @@
-const { User } = require("../../app/models")
-
+const SessionService = require('./session.service')
 class SessionController {
     async store(req, res) {
         const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
-
-        if(!user){
-            return res.status(401).json({message: 'User not found'})
+        try {
+            return res.json(await SessionService.createSession(email, password))
+        } catch (error) {
+            return res.status(error.statusCode).json({message: error.message})
         }
-
-        if(!(await user.checkPassword(password))){
-            return res.status(401).json({message: 'Incorrect Password'})
-        }
-
-        return res.json({
-            user,
-            token: user.generateToken()
-        })
     }
 }
 
