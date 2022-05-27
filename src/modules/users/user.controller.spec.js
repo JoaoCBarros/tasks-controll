@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs/dist/bcrypt")
 const truncate = require("../../../test/utils/truncate")
+const request = require('supertest')
+const app = require('../../app')
 const { User } = require('../../app/models')
 
 describe('User', () => {
