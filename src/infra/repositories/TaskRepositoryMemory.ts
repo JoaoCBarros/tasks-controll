@@ -6,6 +6,24 @@ import { v4 as uuidv4 } from "uuid";
 
 export default class TaskRepositoryMemory implements TaskRepository {
   tasks: Task[] = [];
+
+  async finishTask(taskId: string): Promise<Task> {
+    this.tasks = this.tasks.reduce((acc, cur) => {
+      if (taskId === cur.id) {
+        return [
+          ...acc,
+          {
+            ...cur,
+            isFinished: true,
+          },
+        ];
+      }
+    }, []);
+
+    return this.tasks.filter((item) => {
+      return item.id === taskId;
+    })[0];
+  }
   async getTasksList(query?: GetTasksListQueryParams): Promise<Task[]> {
     return this.tasks;
   }
@@ -16,6 +34,8 @@ export default class TaskRepositoryMemory implements TaskRepository {
     userId,
     id,
     createdAt,
+    isFinished,
+    isOverdue,
   }: AddTaskDTO): Promise<Task> {
     this.tasks.push({
       id,
@@ -24,6 +44,8 @@ export default class TaskRepositoryMemory implements TaskRepository {
       expiresAt,
       userId,
       createdAt,
+      isFinished,
+      isOverdue,
     });
 
     return this.tasks.filter((item) => {

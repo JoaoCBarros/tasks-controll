@@ -10,4 +10,6 @@ export default interface Task {
   status?: TTaskStatus;
   createdAt: DateTime | Date;
   finishedAt?: DateTime | Date;
+  isFinished?: boolean;
+  isOverdue?: boolean;
 }

@@ -7,6 +7,8 @@ export interface AddTaskDTO {
   expiresAt: DateTime;
   createdAt: DateTime;
   userId: string;
+  isFinished: boolean;
+  isOverdue: boolean;
 }
 
 export interface AddTaskRequestDTO {

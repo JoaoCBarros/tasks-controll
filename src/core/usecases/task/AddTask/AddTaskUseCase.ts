@@ -16,6 +16,8 @@ export default class AddTaskUseCase {
       expiresAt,
       userId,
       createdAt,
+      isFinished: false,
+      isOverdue: false,
     });
   }
 }

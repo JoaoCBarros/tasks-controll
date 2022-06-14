@@ -10,11 +10,10 @@ export default class GetOneTask {
 
   async execute(taskId: string) {
     const task = await this.taskRepository.getTaskById(taskId);
-    const dateNow = DateTime.now();
-    const dateDiffInDays = Math.round(
-      (task.expiresAt as DateTime).diff(dateNow, ["days"]).days
-    );
-    task.status = this.taskFactory.calculeStatus(dateDiffInDays);
+
+    task.status = this.taskFactory.calculeStatus(task.expiresAt as DateTime);
+
+    // task.isOverdue = this.taskFactory.verifyOverdue(task.expiresAt as DateTime);
     return task;
   }
 }

@@ -7,4 +7,5 @@ export default interface TaskRepository {
   addTask(date: AddTaskDTO): Promise<Task>;
   getTasksList(query?: GetTasksListQueryParams): Promise<Task[]>;
   getTaskById(taskId: string): Promise<Task>;
+  finishTask(taskId: string): Promise<Task>;
 }
