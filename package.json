@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && jest ./dist",
+    "test": "tsc && jest ./dist/src/",
+    "test:2e2": "tsc && jest ./dist/test",
     "express": "tsc && node ./dist/src/infra/http/express.js",
     "start": "tsnd --transpile-only --respawn --ignore-watch node_modules"
   },
