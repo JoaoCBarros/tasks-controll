@@ -10,12 +10,12 @@ export default class GetTasksList {
   ) {}
 
   async execute(data?: GetTasksListDTO) {
-    const unCalculatedStatusTasksList: Task[] =
-      await this.taskRepository.getTasksList(data);
-
-    const tasksList = this.taskFactory.calculateStatusToTaskList(
-      unCalculatedStatusTasksList
+    const unFormattedTasksList: Task[] = await this.taskRepository.getTasksList(
+      data
     );
+
+    const tasksList = this.taskFactory.formatTasksList(unFormattedTasksList);
+
     return tasksList;
   }
 }

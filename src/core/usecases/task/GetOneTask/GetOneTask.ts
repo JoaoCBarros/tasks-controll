@@ -12,8 +12,8 @@ export default class GetOneTask {
     const task = await this.taskRepository.getTaskById(taskId);
 
     task.status = this.taskFactory.calculeStatus(task.expiresAt as DateTime);
+    task.isOverdue = this.taskFactory.verifyOverdue(task.expiresAt as DateTime);
 
-    // task.isOverdue = this.taskFactory.verifyOverdue(task.expiresAt as DateTime);
     return task;
   }
 }

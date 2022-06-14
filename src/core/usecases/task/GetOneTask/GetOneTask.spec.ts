@@ -57,4 +57,21 @@ describe("GetOneTask", () => {
     const task = await getOneTask.execute(addedTask.id);
     expect(task.status).toBe(CTaskStatus.RED);
   });
+
+  it("Should get Overdue Task", async () => {
+    const taskRepositoryMemory = new TaskRepositoryMemory();
+    const taskFactory = new TaskFactoryUseCase();
+    const addTaskUseCase = new AddTaskUseCase(taskRepositoryMemory);
+    const getOneTask = new GetOneTask(taskRepositoryMemory, taskFactory);
+
+    const addedTask = await addTaskUseCase.execute({
+      title: "My First Task",
+      description: "Learn the Bank Manual",
+      expiresAt: DateTime.fromISO("2022-01-01T00:00:00"),
+      userId: "any_user_id",
+    });
+
+    const task = await getOneTask.execute(addedTask.id);
+    expect(task.isOverdue).toBe(true);
+  });
 });

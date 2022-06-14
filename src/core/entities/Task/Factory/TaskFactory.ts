@@ -6,4 +6,6 @@ export default interface TaskFactory {
   calculateStatusToTaskList(unCalculatedStatusTasksList: Task[]): Task[];
   calculeStatus(expiresAt: DateTime): TTaskStatus;
   verifyOverdue(expiresAt: DateTime): boolean;
+  checkOverdueInTasksList(tasksList: Task[]): Task[];
+  formatTasksList(unformattedTasksList: Task[]): Task[];
 }

@@ -4,6 +4,29 @@ import TaskFactory from "../../entities/Task/Factory/TaskFactory";
 import Task from "../../entities/Task/Task";
 
 export default class TaskFactoryUseCase implements TaskFactory {
+  formatTasksList(unformattedTasksList: Task[]): Task[] {
+    const calculatedStatusTasksList =
+      this.calculateStatusToTaskList(unformattedTasksList);
+
+    const verifiedOverdueTasksList = this.checkOverdueInTasksList(
+      calculatedStatusTasksList
+    );
+
+    return verifiedOverdueTasksList;
+  }
+
+  checkOverdueInTasksList(tasksList: Task[]): Task[] {
+    return tasksList.reduce((acc, cur) => {
+      const isOverDue = this.verifyOverdue(cur.expiresAt as DateTime);
+      return [
+        ...acc,
+        {
+          ...cur,
+          isOverdue: isOverDue,
+        },
+      ];
+    }, []);
+  }
   verifyOverdue(expiresAt: DateTime): boolean {
     const dateNow = DateTime.now();
     return expiresAt < dateNow;
