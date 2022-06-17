@@ -1,0 +1,24 @@
+import TransparentTokenProvider from "../../core/providers/TransparentTokenProvider";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { DecodedJwtToken } from "./JwtProviderDTO";
+require("dotenv").config();
+export default class JwtProvider implements TransparentTokenProvider {
+  async verifyTransparentToken(token: string): Promise<string | boolean> {
+    try {
+      const decodedAuth = jwt.verify(token, process.env.JWT_SECRET);
+      return (<any>decodedAuth).userId;
+    } catch (error) {
+      throw new Error("INVALID_TOKEN");
+    }
+  }
+  async generateTransparentToken(
+    userId: string,
+    expiresIn: string
+  ): Promise<string> {
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+      expiresIn: expiresIn,
+      algorithm: "HS256",
+    });
+    return token;
+  }
+}
