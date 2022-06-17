@@ -6,6 +6,8 @@ export interface GetTasksListDTO {
   userId?: string;
   startDate?: DateTime | Date;
   endDate?: DateTime | Date;
+  order?: order;
+  orderField?: string;
 }
 
 export interface TasksListReponseDTO {
@@ -15,3 +17,5 @@ export interface TasksListReponseDTO {
   status: TTaskStatus;
   userId: string;
 }
+
+export type order = "asc" | "desc";

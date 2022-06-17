@@ -11,7 +11,11 @@ export default class GetTasksList {
 
   async execute(data?: GetTasksListDTO) {
     const unFormattedTasksList: Task[] = await this.taskRepository.getTasksList(
-      data
+      {
+        ...data,
+        order: "desc",
+        orderField: "expiresAt",
+      }
     );
 
     const tasksList = this.taskFactory.formatTasksList(unFormattedTasksList);

@@ -3,6 +3,7 @@ import Task from "../../core/entities/Task/Task";
 import TaskRepository from "../../core/repository/TaskRepository";
 import { AddTaskDTO } from "../../core/usecases/task/AddTask/AddTaskDTO";
 import { v4 as uuidv4 } from "uuid";
+import { DateTime } from "ts-luxon";
 
 export default class TaskRepositoryMemory implements TaskRepository {
   tasks: Task[] = [];
@@ -25,6 +26,14 @@ export default class TaskRepositoryMemory implements TaskRepository {
     })[0];
   }
   async getTasksList(query?: GetTasksListQueryParams): Promise<Task[]> {
+    if (query.orderField === "expiresAt") {
+      this.tasks.sort(function (a, b) {
+        return (
+          (a.expiresAt as DateTime).toMillis() -
+          (b.expiresAt as DateTime).toMillis()
+        );
+      });
+    }
     return this.tasks;
   }
   async addTask({

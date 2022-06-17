@@ -64,4 +64,36 @@ describe("GetTasksList", () => {
     expect(tasksList[1].isOverdue).toBe(true);
     expect(tasksList[2].isOverdue).toBe(false);
   });
+
+  it("Should get tasks list in order by ExpiresAt", async () => {
+    const taskRepositoryMemory = new TaskRepositoryMemory();
+    const taskFactory = new TaskFactoryUseCase();
+    const addTaskUseCase = new AddTaskUseCase(taskRepositoryMemory);
+    const getTasksList = new GetTasksList(taskRepositoryMemory, taskFactory);
+
+    await addTaskUseCase.execute({
+      title: "My First Task",
+      description: "Learn the Bank Manual",
+      expiresAt: DateTime.now().plus({ days: 4 }),
+      userId: "any_user_id",
+    });
+    await addTaskUseCase.execute({
+      title: "My Second Task",
+      description: "Learn the Bank Manual",
+      expiresAt: DateTime.now().plus({ days: 1 }),
+      userId: "any_user_id",
+    });
+    await addTaskUseCase.execute({
+      title: "My Three Task",
+      description: "Learn the Bank Manual",
+      expiresAt: DateTime.now().plus({ days: 2 }),
+      userId: "any_user_id",
+    });
+
+    const tasksList = await getTasksList.execute();
+    console.log(tasksList);
+    expect(tasksList[0].title).toBe("My Second Task");
+    expect(tasksList[1].title).toBe("My Three Task");
+    expect(tasksList[2].title).toBe("My First Task");
+  });
 });
