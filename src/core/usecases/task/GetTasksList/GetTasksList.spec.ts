@@ -91,7 +91,7 @@ describe("GetTasksList", () => {
     });
 
     const tasksList = await getTasksList.execute();
-    console.log(tasksList);
+
     expect(tasksList[0].title).toBe("My Second Task");
     expect(tasksList[1].title).toBe("My Three Task");
     expect(tasksList[2].title).toBe("My First Task");
