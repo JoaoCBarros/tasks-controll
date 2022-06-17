@@ -55,7 +55,7 @@ describe("GetTasksList", () => {
     await addTaskUseCase.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
-      expiresAt: DateTime.fromISO("2022-06-17T00:00:00"),
+      expiresAt: DateTime.now().plus({ days: 1 }),
       userId: "any_user_id",
     });
 

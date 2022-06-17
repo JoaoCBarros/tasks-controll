@@ -1,0 +1,34 @@
+import Session from "../../core/entities/Session/Session";
+import User from "../../core/entities/User/User";
+import TransparentTokenProvider from "../../core/providers/TransparentTokenProvider";
+import SessionRepository from "../../core/repository/SessionRepository";
+
+export default class SessionRepositoryMemory implements SessionRepository {
+  constructor(
+    private readonly transparentTokenProvider: TransparentTokenProvider
+  ) {}
+  async verifyToken(token: string, userId: string): Promise<boolean> {
+    try {
+      const isValidToken =
+        await this.transparentTokenProvider.verifyTransparentToken(token);
+      return true;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+  async createSession(email: string, password: string): Promise<Session> {
+    const token = await this.transparentTokenProvider.generateTransparentToken(
+      "any_user_id",
+      process.env.SESSION_EXPIRES_NORMAL
+    );
+
+    return {
+      email: email,
+      userId: "any_user_id",
+      token: token,
+    };
+  }
+  loggoutSession(userId: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+}
