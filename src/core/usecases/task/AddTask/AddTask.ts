@@ -3,7 +3,7 @@ import { AddTaskRequestDTO } from "./AddTaskDTO";
 import { v4 as uuidv4 } from "uuid";
 import { DateTime } from "ts-luxon";
 
-export default class AddTaskUseCase {
+export default class AddTask {
   constructor(private readonly taskRepository: TaskRepository) {}
 
   async execute({ title, description, expiresAt, userId }: AddTaskRequestDTO) {
