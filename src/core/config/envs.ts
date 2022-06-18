@@ -11,6 +11,24 @@ export default class Env {
     ) {
       throw new Error("NOT FOUND SESSION_EXPIRES_NORMAL ENV");
     }
+    if (!process.env.DB_USER || typeof process.env.DB_USER !== "string") {
+      throw new Error("NOT FOUND DB_USER ENV");
+    }
+    if (
+      !process.env.DB_PASSWORD ||
+      typeof process.env.DB_PASSWORD !== "string"
+    ) {
+      throw new Error("NOT FOUND DB_PASSWORD ENV");
+    }
+    if (!process.env.DB_NAME || typeof process.env.DB_NAME !== "string") {
+      throw new Error("NOT FOUND DB_NAME ENV");
+    }
+    if (!process.env.DB_HOST || typeof process.env.DB_HOST !== "string") {
+      throw new Error("NOT FOUND DB_HOST ENV");
+    }
+    if (!process.env.DB_PORT || typeof process.env.DB_PORT !== "string") {
+      throw new Error("NOT FOUND DB_PORT ENV");
+    }
   }
   static getEnv(envName: string) {
     this.verifyEnvs();
