@@ -1,8 +1,8 @@
-import Env from "../../core/config/envs";
-import Session from "../../core/entities/Session/Session";
-import User from "../../core/entities/User/User";
-import TransparentTokenProvider from "../../core/providers/TransparentTokenProvider";
-import SessionRepository from "../../core/repository/SessionRepository";
+import Env from "../../../core/config/envs";
+import Session from "../../../core/entities/Session/Session";
+import User from "../../../core/entities/User/User";
+import TransparentTokenProvider from "../../../core/providers/TransparentTokenProvider";
+import SessionRepository from "../../../core/repository/SessionRepository";
 
 export default class SessionRepositoryMemory implements SessionRepository {
   constructor(

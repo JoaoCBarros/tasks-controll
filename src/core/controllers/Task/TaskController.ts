@@ -12,12 +12,10 @@ import {
 
 export default class TaskController {
   constructor(
-    private readonly taskRepository: TaskRepository,
     private readonly addTask: AddTask,
     private readonly finishTaskUseCase: FinishTask,
     private readonly getOneTask: GetOneTask,
-    private readonly getTasksList: GetTasksList,
-    private readonly taskFactory: TaskFactoryUseCase
+    private readonly getTasksList: GetTasksList
   ) {}
 
   async createTask({ auth, body }: CreateTaskRequest) {
