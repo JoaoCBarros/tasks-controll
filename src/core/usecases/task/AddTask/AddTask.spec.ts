@@ -1,5 +1,5 @@
 import { DateTime } from "ts-luxon";
-import TaskRepositoryMemory from "../../../../infra/repositories/TaskRepositoryMemory";
+import TaskRepositoryMemory from "../../../../infra/repositories/teste/TaskRepositoryMemory";
 import GetTasksList from "../GetTasksList/GetTasksList";
 import TaskFactoryUseCase from "../TaskFactoryUseCase";
 import AddTask from "./AddTask";

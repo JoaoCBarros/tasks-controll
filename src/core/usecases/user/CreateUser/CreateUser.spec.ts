@@ -1,4 +1,4 @@
-import UserRepositoryMemory from "../../../../infra/repositories/UserRepositoryMemory";
+import UserRepositoryMemory from "../../../../infra/repositories/teste/UserRepositoryMemory";
 import CreateUser from "./CreateUser";
 
 describe("CreateUser", () => {

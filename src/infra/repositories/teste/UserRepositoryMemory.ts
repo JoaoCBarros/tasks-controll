@@ -1,6 +1,6 @@
-import User from "../../core/entities/User/User";
-import UserRepository from "../../core/repository/UserRepository";
-import { GetUserListQueryParams } from "../../core/usecases/user/GetUserList/GetUserListDTO";
+import User from "../../../core/entities/User/User";
+import UserRepository from "../../../core/repository/UserRepository";
+import { GetUserListQueryParams } from "../../../core/usecases/user/GetUserList/GetUserListDTO";
 
 export default class UserRepositoryMemory implements UserRepository {
   users: User[] = [];

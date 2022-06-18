@@ -1,6 +1,6 @@
 import { DateTime } from "ts-luxon";
-import TaskRepositoryMemory from "../../../../infra/repositories/TaskRepositoryMemory";
-import AddTaskUseCase from "../AddTask/AddTaskUseCase";
+import TaskRepositoryMemory from "../../../../infra/repositories/teste/TaskRepositoryMemory";
+import AddTask from "../AddTask/AddTask";
 import TaskFactoryUseCase from "../TaskFactoryUseCase";
 import GetTasksList from "./GetTasksList";
 
@@ -8,22 +8,22 @@ describe("GetTasksList", () => {
   it("Should have 3 tasks in List", async () => {
     const taskRepositoryMemory = new TaskRepositoryMemory();
     const taskFactory = new TaskFactoryUseCase();
-    const addTaskUseCase = new AddTaskUseCase(taskRepositoryMemory);
+    const addTask = new AddTask(taskRepositoryMemory);
     const getTasksList = new GetTasksList(taskRepositoryMemory, taskFactory);
 
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.fromISO("2022-06-17T00:00:00"),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.fromISO("2022-06-17T00:00:00"),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.fromISO("2022-06-17T00:00:00"),
@@ -37,22 +37,22 @@ describe("GetTasksList", () => {
   it("Should have 2 overdue tasks and 1 valid task in List", async () => {
     const taskRepositoryMemory = new TaskRepositoryMemory();
     const taskFactory = new TaskFactoryUseCase();
-    const addTaskUseCase = new AddTaskUseCase(taskRepositoryMemory);
+    const addTask = new AddTask(taskRepositoryMemory);
     const getTasksList = new GetTasksList(taskRepositoryMemory, taskFactory);
 
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.fromISO("2022-01-01T00:00:00"),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.fromISO("2022-01-01T00:00:00"),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.now().plus({ days: 1 }),
@@ -68,22 +68,22 @@ describe("GetTasksList", () => {
   it("Should get tasks list in order by ExpiresAt", async () => {
     const taskRepositoryMemory = new TaskRepositoryMemory();
     const taskFactory = new TaskFactoryUseCase();
-    const addTaskUseCase = new AddTaskUseCase(taskRepositoryMemory);
+    const addTask = new AddTask(taskRepositoryMemory);
     const getTasksList = new GetTasksList(taskRepositoryMemory, taskFactory);
 
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My First Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.now().plus({ days: 4 }),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My Second Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.now().plus({ days: 1 }),
       userId: "any_user_id",
     });
-    await addTaskUseCase.execute({
+    await addTask.execute({
       title: "My Three Task",
       description: "Learn the Bank Manual",
       expiresAt: DateTime.now().plus({ days: 2 }),
