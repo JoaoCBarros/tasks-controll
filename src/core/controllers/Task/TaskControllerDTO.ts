@@ -1,15 +1,8 @@
 import { DateTime } from "ts-luxon";
-import { AuthRequest } from "../../entities/Session/DTO/SessionDTO";
 import { GetTasksListQueryParams } from "../../entities/Task/Dto/TaskDto";
+import { ControllerRequest } from "../DTO/RequestControllersDTO";
 
-export interface TaskControllerRequest {
-  params?: object;
-  body?: object;
-  queryStrings?: object;
-  auth?: AuthRequest;
-}
-
-export interface FinishTaskRequest extends TaskControllerRequest {
+export interface FinishTaskRequest extends ControllerRequest {
   params?: FinishTaskParams;
 }
 
@@ -17,11 +10,11 @@ export interface FinishTaskParams {
   taskId: string;
 }
 
-export interface CreateTaskRequest extends TaskControllerRequest {
+export interface CreateTaskRequest extends ControllerRequest {
   body?: CreateTaskBody;
 }
 
-export interface TasksListRequest extends TaskControllerRequest {
+export interface TasksListRequest extends ControllerRequest {
   queryStrings?: GetTasksListQueryParams;
 }
 
