@@ -30,7 +30,7 @@ export default class Env {
       throw new Error("NOT FOUND DB_PORT ENV");
     }
   }
-  static getEnv(envName: string) {
+  static getEnv(envName: string): any {
     this.verifyEnvs();
     return process.env[envName];
   }
