@@ -1,7 +1,7 @@
 import TransparentTokenProvider from "../../core/providers/TransparentTokenProvider";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { DecodedJwtToken } from "./JwtProviderDTO";
-require("dotenv").config();
+import Env from "../../core/config/envs";
 export default class JwtProvider implements TransparentTokenProvider {
   async verifyTransparentToken(token: string): Promise<string | boolean> {
     try {
@@ -15,7 +15,7 @@ export default class JwtProvider implements TransparentTokenProvider {
     userId: string,
     expiresIn: string
   ): Promise<string> {
-    const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId }, Env.getEnv("JWT_SECRET"), {
       expiresIn: expiresIn,
       algorithm: "HS256",
     });

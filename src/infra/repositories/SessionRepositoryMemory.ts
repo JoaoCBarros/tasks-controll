@@ -1,3 +1,4 @@
+import Env from "../../core/config/envs";
 import Session from "../../core/entities/Session/Session";
 import User from "../../core/entities/User/User";
 import TransparentTokenProvider from "../../core/providers/TransparentTokenProvider";
@@ -19,7 +20,7 @@ export default class SessionRepositoryMemory implements SessionRepository {
   async createSession(email: string, password: string): Promise<Session> {
     const token = await this.transparentTokenProvider.generateTransparentToken(
       "any_user_id",
-      process.env.SESSION_EXPIRES_NORMAL
+      Env.getEnv("SESSION_EXPIRES_NORMAL")
     );
 
     return {
