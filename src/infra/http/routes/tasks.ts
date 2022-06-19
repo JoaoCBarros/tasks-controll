@@ -6,5 +6,6 @@ const tasksExpressAdapter = new TasksExpressAdapter(makeTaskController());
 const tasksRouter = Router();
 
 tasksRouter.get("/", tasksExpressAdapter.list());
+// tasksRouter.get("/:taskId", tasksExpressAdapter.show());
 
 export default tasksRouter;

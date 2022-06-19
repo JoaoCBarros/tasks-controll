@@ -9,7 +9,7 @@ export default class TasksExpressAdapter {
   list() {
     return async (req: RequestAuthApplication, res: Response) => {
       req.auth = {
-        userId: "123123",
+        userId: "58e65d85-19db-4fe0-b455-1cfda0198d3e",
       };
       const tasksList = await this.taskController.tasksList({
         queryStrings: {
