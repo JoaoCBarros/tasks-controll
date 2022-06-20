@@ -6,7 +6,7 @@ import {
   PrimaryColumn,
   Timestamp,
 } from "typeorm";
-import { User } from "./User";
+import User from "./User";
 
 @Entity()
 export default class Task {

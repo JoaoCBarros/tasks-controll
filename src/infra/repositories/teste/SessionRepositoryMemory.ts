@@ -18,9 +18,9 @@ export default class SessionRepositoryMemory implements SessionRepository {
       throw new Error(error.message);
     }
   }
-  async createSession(email: string, password: string): Promise<Session> {
+  async createSession(email: string, userId: string): Promise<Session> {
     const token = await this.transparentTokenProvider.generateTransparentToken(
-      "any_user_id",
+      userId,
       Env.getEnv("SESSION_EXPIRES_NORMAL")
     );
 

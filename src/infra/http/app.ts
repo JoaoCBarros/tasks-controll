@@ -6,6 +6,8 @@ dotenv.config();
 
 const app: Express = express();
 
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(routes);
 
 app.get("/", (req: Request, res: Response) => {

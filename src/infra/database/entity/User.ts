@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
 import Task from "./Task";
 
 @Entity()
-export class User {
+export default class User {
   @PrimaryColumn()
   id: string;
 

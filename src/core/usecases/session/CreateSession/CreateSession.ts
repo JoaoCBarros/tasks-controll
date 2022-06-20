@@ -15,6 +15,7 @@ export default class CreateSession {
     if (!user) {
       throw new Error("INVALID_CREDENTIALS");
     }
-    return await this.sessionRepository.createSession(email, password);
+
+    return await this.sessionRepository.createSession(user.email, user.id);
   }
 }

@@ -1,5 +1,5 @@
 import { AppDataSource } from "../database/data-source";
-import { User } from "../database/entity/User";
+import User from "../database/entity/User";
 import { randomUUID } from "crypto";
 
 // AppDataSource.initialize()
