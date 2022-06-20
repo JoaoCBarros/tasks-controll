@@ -1,3 +1,4 @@
+import { DateTime } from "ts-luxon";
 import {
   Column,
   CreateDateColumn,
@@ -26,10 +27,10 @@ export default class Task {
   userId: string;
 
   @Column({ type: "timestamp" })
-  expiresAt: Timestamp;
+  expiresAt: DateTime;
 
   @CreateDateColumn()
-  createdAt: Timestamp;
+  createdAt: DateTime;
 
   @ManyToOne(() => User, (user) => user.tasks)
   user: User;

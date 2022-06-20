@@ -9,8 +9,26 @@ import { DateTime } from "ts-luxon";
 import TaskAdapter from "../../../core/adpters/Task/TaskAdapter";
 
 export default class TaskRepositoryPostgres implements TaskRepository {
-  addTask(date: AddTaskDTO): Promise<Task> {
-    throw new Error("Method not implemented.");
+  async addTask(data: AddTaskDTO): Promise<Task> {
+    const task = new TaskModel();
+    task.title = data.title;
+    task.description = data.description;
+    task.id = data.id;
+    task.userId = data.userId;
+    task.expiresAt = data.expiresAt;
+    task.isFinished = false;
+
+    await AppDataSource.manager.save(task);
+
+    return TaskAdapter.create({
+      title: task.title,
+      description: task.description,
+      expiresAt: task.expiresAt,
+      id: task.id,
+      isFinished: task.isFinished,
+      createdAt: task.createdAt,
+      userId: task.userId,
+    });
   }
   async getTasksList(query?: GetTasksListQueryParams): Promise<Task[]> {
     const tasks = await AppDataSource.manager.find(TaskModel, {

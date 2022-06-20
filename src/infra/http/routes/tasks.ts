@@ -8,6 +8,10 @@ const tasksExpressAdapter = new TasksExpressAdapter(makeTaskController());
 const tasksRouter = Router();
 const authMiddleware = new AuthMiddleware(makeSessionController());
 tasksRouter.get("/", authMiddleware.handler(), tasksExpressAdapter.list());
-// tasksRouter.get("/:taskId", tasksExpressAdapter.show());
+tasksRouter.post(
+  "/",
+  authMiddleware.handler(),
+  tasksExpressAdapter.createTask()
+);
 
 export default tasksRouter;
