@@ -10,9 +10,9 @@ export default class UserRepositoryMemory implements UserRepository {
       return data.id === item.id;
     })[0];
   }
-  async getByUserCredentials(email: string, password: string): Promise<User> {
+  async getUserByField(field: string, value: string): Promise<User> {
     return this.users.filter((item) => {
-      return item.email === email && item.password === password;
+      return item[field] === value;
     })[0];
   }
   async getUserList(queryParams?: GetUserListQueryParams): Promise<User[]> {

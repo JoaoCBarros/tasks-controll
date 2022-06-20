@@ -1,6 +1,6 @@
 import UserRepositoryMemory from "../../../../infra/repositories/teste/UserRepositoryMemory";
 import CreateUser from "../CreateUser/CreateUser";
-import GetUserByCredentials from "./GetUserByCredentials";
+import GetUserByField from "./GetUserByField";
 
 describe("GetUserByCredentials", () => {
   let userRepository: UserRepositoryMemory;
@@ -14,7 +14,7 @@ describe("GetUserByCredentials", () => {
     });
   });
   it("Should get user by Credentials", async () => {
-    const getUserByCredentials = new GetUserByCredentials(userRepository);
+    const getUserByCredentials = new GetUserByField(userRepository);
     const user = await getUserByCredentials.execute({
       email: "joao.teste@gmail.com",
       password: "123123",

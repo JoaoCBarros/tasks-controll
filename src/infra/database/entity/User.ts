@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
+} from "typeorm";
+
 import Task from "./Task";
 
 @Entity()

@@ -1,6 +1,6 @@
 import SessionRepository from "../../../repository/SessionRepository";
 import UserRepository from "../../../repository/UserRepository";
-
+import bcrypt from "bcrypt";
 export default class CreateSession {
   constructor(
     private readonly sessionRepository: SessionRepository,
@@ -8,11 +8,13 @@ export default class CreateSession {
   ) {}
 
   async execute(email: string, password: string) {
-    const user = await this.userRepository.getByUserCredentials(
-      email,
-      password
-    );
+    const user = await this.userRepository.getUserByField("email", email);
+
     if (!user) {
+      throw new Error("INVALID_CREDENTIALS");
+    }
+
+    if (!(await bcrypt.compare(password, user.password))) {
       throw new Error("INVALID_CREDENTIALS");
     }
 
