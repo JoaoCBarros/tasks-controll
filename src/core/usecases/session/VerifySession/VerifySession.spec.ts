@@ -34,19 +34,17 @@ describe("VerifySession", () => {
     verifySession = new VerifySession(sessionRepositoryMemory);
   });
   it("Should autenticate with success", async () => {
-    await expect(verifySession.execute(authToken, authUserId)).resolves.toBe(
-      true
-    );
+    await expect(verifySession.execute(authToken)).resolves.toBe(true);
   });
   it("Should return a INVALID_AUTH_TOKEN Error", async () => {
-    await expect(
-      verifySession.execute(authToken, "wrong_id_user")
-    ).rejects.toThrowError("INVALID_AUTH_TOKEN");
+    await expect(verifySession.execute(authToken)).rejects.toThrowError(
+      "INVALID_AUTH_TOKEN"
+    );
   });
 
   it("Should return a Invalid JWT Error", async () => {
-    await expect(
-      verifySession.execute("wrong-token", authUserId)
-    ).rejects.toThrowError("INVALID_TOKEN");
+    await expect(verifySession.execute("wrong-token")).rejects.toThrowError(
+      "INVALID_TOKEN"
+    );
   });
 });

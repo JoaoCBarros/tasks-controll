@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { DecodedJwtToken } from "./JwtProviderDTO";
 import Env from "../../core/config/envs";
 export default class JwtProvider implements TransparentTokenProvider {
-  async verifyTransparentToken(token: string): Promise<string | boolean> {
+  async verifyTransparentToken(token: string): Promise<string> {
     try {
       const decodedAuth = jwt.verify(token, process.env.JWT_SECRET);
       return (<any>decodedAuth).userId;

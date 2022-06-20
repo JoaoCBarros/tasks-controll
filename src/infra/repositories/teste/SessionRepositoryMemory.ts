@@ -8,7 +8,7 @@ export default class SessionRepositoryMemory implements SessionRepository {
   constructor(
     private readonly transparentTokenProvider: TransparentTokenProvider
   ) {}
-  async verifyToken(token: string, userId: string): Promise<string | boolean> {
+  async verifyToken(token: string): Promise<string> {
     try {
       const userId = await this.transparentTokenProvider.verifyTransparentToken(
         token

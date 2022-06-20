@@ -19,8 +19,15 @@ export default class SessionRepositoryPostgres implements SessionRepository {
       token: token,
     };
   }
-  verifyToken(token: string, userId: string): Promise<string | boolean> {
-    throw new Error("Method not implemented.");
+  async verifyToken(token: string): Promise<string> {
+    try {
+      const userId = await this.transparentTokenProvider.verifyTransparentToken(
+        token
+      );
+      return userId;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
   loggoutSession(userId: string): Promise<void> {
     throw new Error("Method not implemented.");
