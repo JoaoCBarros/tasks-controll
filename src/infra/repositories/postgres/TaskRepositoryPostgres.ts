@@ -13,7 +13,14 @@ export default class TaskRepositoryPostgres implements TaskRepository {
     throw new Error("Method not implemented.");
   }
   async getTasksList(query?: GetTasksListQueryParams): Promise<Task[]> {
-    const tasks = await AppDataSource.manager.find(TaskModel);
+    const tasks = await AppDataSource.manager.find(TaskModel, {
+      where: {
+        userId: query.userId,
+      },
+      order: {
+        [query.orderField]: query.order,
+      },
+    });
     return tasks.reduce((acc, cur) => {
       return [
         ...acc,
