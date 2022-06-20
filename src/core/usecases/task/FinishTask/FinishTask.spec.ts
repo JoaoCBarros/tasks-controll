@@ -20,7 +20,7 @@ describe("FinishTask", () => {
       userId: "any_user_id",
     });
 
-    await finishTask.execute(addedTask.id);
+    await finishTask.execute(addedTask.id, "any_user_id");
 
     const task = await getOneTask.execute(addedTask.id);
 

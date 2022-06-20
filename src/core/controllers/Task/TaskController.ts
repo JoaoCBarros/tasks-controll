@@ -44,11 +44,11 @@ export default class TaskController {
     return tasks;
   }
 
-  async finishTask({ params }: FinishTaskRequest) {
+  async finishTask({ params, auth }: FinishTaskRequest) {
     const { taskId } = params;
+    const { userId } = auth;
 
-    const task = await this.finishTaskUseCase.execute(taskId);
-
+    const task = await this.finishTaskUseCase.execute(taskId, userId);
     return task;
   }
 }

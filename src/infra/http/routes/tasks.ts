@@ -14,4 +14,10 @@ tasksRouter.post(
   tasksExpressAdapter.createTask()
 );
 
+tasksRouter.put(
+  "/:taskId",
+  authMiddleware.handler(),
+  tasksExpressAdapter.finishTask()
+);
+
 export default tasksRouter;

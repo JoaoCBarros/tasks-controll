@@ -34,6 +34,7 @@ export default class TaskRepositoryPostgres implements TaskRepository {
     const tasks = await AppDataSource.manager.find(TaskModel, {
       where: {
         userId: query.userId,
+        isFinished: false,
       },
       order: {
         [query.orderField]: query.order,
@@ -63,7 +64,18 @@ export default class TaskRepositoryPostgres implements TaskRepository {
       userId: task.userId,
     });
   }
-  finishTask(taskId: string): Promise<Task> {
-    throw new Error("Method not implemented.");
+  async finishTask(taskId: string): Promise<Task> {
+    const task = await AppDataSource.manager.findOneBy(TaskModel, {
+      id: taskId,
+    });
+
+    if (!task) {
+      throw new Error("TASK_NOT_FOUND");
+    }
+
+    return await AppDataSource.manager.save(TaskModel, {
+      ...task,
+      isFinished: true,
+    });
   }
 }
