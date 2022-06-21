@@ -16,10 +16,15 @@ const AppDataSource = new DataSource({
   entities: [User, Task],
   migrations: [],
   subscribers: [],
-  ssl:
+  ssl: Env.getEnv("ENV_MODE") === "production" ? true : false,
+  extra:
     Env.getEnv("ENV_MODE") === "production"
-      ? { rejectUnauthorized: false }
-      : false,
+      ? {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        }
+      : {},
 });
 
 AppDataSource.initialize()
