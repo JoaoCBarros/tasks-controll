@@ -17,12 +17,11 @@ const AppDataSource = new DataSource({
   entities: [User, Task],
   migrations: [],
   subscribers: [],
-  ssl: Env.getEnv("ENV_MODE") === "production" ? true : false,
+  // ssl: Env.getEnv("ENV_MODE") === "production" ? true : false,
   extra:
     Env.getEnv("ENV_MODE") === "production"
       ? {
-          ssl: true,
-          encrypt: false,
+          rejectUnauthorized: false,
         }
       : {},
 });
