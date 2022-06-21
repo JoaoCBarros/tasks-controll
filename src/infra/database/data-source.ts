@@ -6,6 +6,7 @@ import Task from "./entity/Task";
 
 const AppDataSource = new DataSource({
   type: "postgres",
+  url: Env.getEnv("DATABASE_URL"),
   host: Env.getEnv("DB_HOST"),
   port: Env.getEnv("DB_PORT"),
   username: Env.getEnv("DB_USER"),
