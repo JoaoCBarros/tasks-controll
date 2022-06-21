@@ -21,6 +21,7 @@ const AppDataSource = new DataSource({
     Env.getEnv("ENV_MODE") === "production"
       ? {
           ssl: true,
+          encrypt: false,
         }
       : {},
 });
