@@ -1,8 +1,9 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 import User from "./entity/User";
 import Env from "../../core/config/envs";
 import Task from "./entity/Task";
+
 const AppDataSource = new DataSource({
   type: "postgres",
   host: Env.getEnv("DB_HOST"),
@@ -15,6 +16,10 @@ const AppDataSource = new DataSource({
   entities: [User, Task],
   migrations: [],
   subscribers: [],
+  ssl:
+    Env.getEnv("ENV_MODE") === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 AppDataSource.initialize()
