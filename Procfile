@@ -1,1 +1,1 @@
-web: npm start -p $PORT
+web: PORT=$PORT npm start -p $PORT
