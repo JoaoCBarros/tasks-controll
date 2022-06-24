@@ -25,11 +25,17 @@ export default class AuthMiddleware {
       }
       try {
         const userId = await this.sessionController.verifyAuthSession(token);
+        if (!userId) {
+          return res.status(401).send({
+            message: "Invalid auth token",
+            errorCode: "USER_NOT_FOUND",
+          });
+        }
         req.auth = {
           userId,
         };
       } catch (error) {
-        res.status(401).send({
+        return res.status(401).send({
           message: "Invalid auth token",
           errorCode: error.message,
         });

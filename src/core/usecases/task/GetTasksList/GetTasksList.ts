@@ -13,7 +13,7 @@ export default class GetTasksList {
     const unFormattedTasksList: Task[] = await this.taskRepository.getTasksList(
       {
         ...data,
-        order: "desc",
+        order: "asc",
         orderField: "expiresAt",
       }
     );

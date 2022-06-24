@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "test": "npx tsc && jest ./dist/src/",
-    "test:2e2": "npx tsc && jest ./dist/test",
+    "test:e2e": "npx tsc && jest ./dist/test",
     "express": "npx tsc && node ./dist/src/infra/http/server.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/infra/http/server.js\"",
     "start": "node ./dist/src/infra/http/server.js"
