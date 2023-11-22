@@ -1,7 +1,16 @@
-version: '3.1'
+version: "3.1"
 
 services:
-
+  taskcontroll:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3005:3001
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - task_controll_network
   db:
     image: postgres
     restart: always
@@ -11,9 +20,17 @@ services:
       POSTGRES_PASSWORD: root
     ports:
       - 5432:5432
+    networks:
+      - task_controll_network
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - task_controll_network
+
+networks:
+  task_controll_network:
+    driver: bridge
