@@ -13,6 +13,8 @@ RUN npm install
 # Copie todo o código-fonte para o diretório de trabalho
 COPY . .
 
+RUN npm run build
+
 # Exponha a porta do servidor
 EXPOSE 3001
 
